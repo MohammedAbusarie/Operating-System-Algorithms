@@ -1,2 +1,2 @@
 # Operating-System-Algorithms
-Operating System Algorithms Code Implementation
+Operating System Algorithms Code Implementation in c++ and python
