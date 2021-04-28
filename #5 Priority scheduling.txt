@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+//Mohammed Abusarie
+//Sinai University
+//Priority scheduling
+int main()
+{
+    int nop;
+
+    cout<<"Dear user enter the number of processes"<<endl;
+    cin>>nop;
+
+    char a[26]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+    double CPU[nop];
+    double priority[nop];
+    double timer=0;
+
+    for(int i=0;i<nop;i++)
+    {
+        cout<<"Enter cpu cycle of process "<<a[i]<<endl;
+        cin>>CPU[i];
+        cout<<"Enter priority of process "<<a[i]<<endl;
+        cin>>priority[i];
+    }
+
+
+     for(int i=0;i<=nop-2;i++)
+     {
+         int index=i;
+         double min=priority[i];
+         for(int j=i+1;j<=nop-1;j++)
+             if(priority[j]<min)
+             {
+                 min=priority[j];
+                 index=j;
+             }
+
+        swap(CPU[i],CPU[index]);
+        swap(priority[i],priority[index]);
+
+     }
+
+   cout<<"Ordered by priority"<<endl;
+   for(int i=0;i<nop;i++)
+    cout<<CPU[i]<<" ";
+
+   float sum=0;
+   for(int i=0;i<nop;i++)
+   {
+       for(int j=0;j<=i;j++)
+       {
+           sum+=CPU[j];
+       }
+   }
+
+    cout<<endl<<"Turn around time = "<<sum/nop<<endl;
+
+    cout<<"Please don't cry and don't panic"<<endl;
+
+
+}

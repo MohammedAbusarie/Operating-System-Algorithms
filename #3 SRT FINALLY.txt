@@ -1,0 +1,116 @@
+#include <iostream>
+using namespace std;
+//Mohammed Abusarie Fouad
+//Big thanks to DR Khaled
+//Smile to this ugly world :)
+//This code needs to be optimised 
+//Sinai university
+bool all_zero(double a[],int size)
+{
+    bool allzero=true;
+    for(int i=0;i<size;i++)
+       if(a[i]!=0)
+       {
+           allzero=false;
+           break;
+       }
+       return allzero;
+}
+
+int main()
+{
+	 int nop;
+
+	 cout<<"Enter number of processes"<<endl;
+	 cin>>nop;
+
+     char a[26]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+     double arrival  [nop];
+     double process  [nop];
+     double finished [nop];
+      for(int i=0;i<nop;i++)
+      {
+        cout<<"Enter arrival time of process "<<a[i]<<endl;
+        cin>>arrival[i];
+        cout<<"Enter cpu cycle of process "<<a[i]<<endl;
+        cin>>process[i];
+      }
+
+     int help=0;
+     double timer=0;
+     double fetcher;
+	 int index;
+
+     for(int i=0;i<nop;i++)
+     {
+         if(i==0){
+            index =i;
+            process[i]--;
+            timer++;
+            }
+        else
+            {
+                for(int j=0;j<=help;j++)
+                    if(process[j]>0){
+                    fetcher=process[j];
+                    index=j; // the most important part hahahaha
+                    }
+
+                for(int j=0;j<=help;j++)
+                    if(process[j]<fetcher && process[j]>0){
+                     fetcher=process[j];  index=j; }
+
+                if(process[index]>0){
+                  process[index]--;
+                  timer++;
+                  }
+
+            }
+        if(process[index]==0)
+            finished[index]=timer;
+
+        if(help<nop-2)
+            help++;
+     }
+
+    while(!all_zero(process,nop))
+    {
+        for(int i=0;i<nop;i++)
+            if(process[i]!=0 )
+            {
+                fetcher=process[i];
+                index=i;
+                break;
+            }
+
+        for(int i=0;i<nop;i++)
+            if(process[i]<fetcher && process[i]>0)
+              {
+                fetcher=process[i];
+                index=i;
+              }
+        timer+=process[index];
+        finished[index]=timer;
+        process[index]-=process[index];
+
+    }
+
+    cout<<"(";
+    float sum=0;
+    for(int i=0;i<nop;i++)
+    {
+        finished[i]-=arrival[i];
+        sum+=finished[i];
+
+        //decoration
+        if(i!=nop-1)
+        cout<<finished[i]<<"+";
+        else
+        cout<<finished[i];
+
+    }
+    cout<<")/"<<nop<<endl;
+    sum/=nop;
+    cout<<"Taw ="<<sum<<endl;
+
+}

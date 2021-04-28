@@ -1,0 +1,73 @@
+#include <iostream>
+using namespace std;
+//Mohammed Abusarie
+//Sinai University
+//Round Robin with arrival time
+//Coding is life!!!
+int main()
+{
+    int nop;
+    double slice;
+
+    cout<<"Dear user enter the number of processes"<<endl;
+    cin>>nop;
+
+    cout<<"Enter the given slice"<<endl;
+    cin>>slice;
+
+    char a[26]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+    double arrival_time[nop];
+    double CPU[nop];
+    double ended[nop];
+    double timer=0;
+
+    for(int i=0;i<nop;i++)
+    {
+        cout<<"Enter cpu cycle of process "<<a[i]<<endl;
+        cin>>CPU[i];
+        cout<<"Enter arrival time of process "<<a[i]<<endl;
+        cin>>arrival_time[i];
+    }
+
+    int  haha=0;
+    while(haha<nop)
+    {
+        for(int i=0;i<nop;i++)
+        {
+            if(CPU[i]>0)
+            {
+                if(CPU[i]>=slice)
+                {
+                 CPU[i]=CPU[i]-slice;
+                 timer+=slice;
+                }
+                else
+                {
+                 timer+=CPU[i];
+                 CPU[i]=CPU[i]-CPU[i];
+                }
+
+            }
+            if(CPU[i]==0)
+            {
+                ended[i]=timer;
+                CPU[i]= -99;
+                haha++;
+                cout<<haha<<endl;
+            }
+        }
+    }
+    
+    double taw=0 ;
+    for(int i=0;i<nop;i++)
+    {
+        taw=taw+( ended[i]-arrival_time[i] );
+    }
+    taw=taw/nop;
+    cout<<"Turn around time = "<<taw<<endl;
+    cout<<"Please don't cry"<<endl;
+
+
+}
+
+

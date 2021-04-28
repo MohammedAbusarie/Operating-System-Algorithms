@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+//Mohammed Abusarie
+//OS1
+//$$$
+int main()
+{
+char a[26]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+   int n;
+   cout<<"Enter the amount of processes you are dealing with"<<endl;
+   cin>>n;
+   double process[n];
+
+   for(int i=0;i<n;i++)
+   {
+       cout<<"Enter the time of process "<<a[i]<<endl;
+       cin>>process[i];
+   }
+
+   float sum=0;
+   for(int i=0;i<n;i++)
+   {
+       for(int j=0;j<=i;j++)
+       {
+           sum+=process[j];
+       }
+   }
+
+cout<<"Taw ="<<sum/n<<endl;
+
+}
+
+

@@ -1,0 +1,49 @@
+#Mohammed Abusrie
+#Python
+def all_is_zero(list):
+    aiz=True
+    for i in range(len(list)):
+        if(list[i]!=0):
+            aiz=False
+    return aiz
+letter=65
+ARRIVAL = []
+PROCESS=[]
+CPU=[]
+FINISHED=[]
+do_cpu=[]
+sum=0.0
+timer=0
+
+n=int(input("Number of processes?"))
+for i in range (0,n):
+    print("Process "+chr(letter))
+    ARRIVAL.append(float(input("Enter Arrival Time")))
+    CPU.append(float(input("Enter CPU process")))
+    FINISHED.append(0.0)
+    letter+=1
+for i in range (0,len(CPU)):
+    do_cpu.append(CPU[i])
+    min_value=min(k for k in do_cpu if k>0)
+    index=do_cpu.index(min_value)
+    if(do_cpu[index]>0):
+        timer+=1
+        do_cpu[index]-=1
+    if(do_cpu[index]==0):
+        FINISHED[index]=timer
+        do_cpu[index]==0
+
+print(do_cpu)
+while(all_is_zero(do_cpu)!=True):
+    min_value=min(k for k in do_cpu if k>0)
+    index=do_cpu.index(min_value)
+    if( do_cpu[index]>0):
+         timer+=do_cpu[index]
+         do_cpu[index]-=do_cpu[index]
+         FINISHED[index]=timer
+
+for i in range (0,len(do_cpu)):
+    print(FINISHED[i]-ARRIVAL[i],end=" ")
+    sum+=FINISHED[i] - ARRIVAL[i]
+print()
+print("Using SRT Algorithm TAW=",sum/len(do_cpu))

@@ -1,0 +1,98 @@
+
+def FCFS(nop):
+    #FCFS
+    #PYTHON IS GREAT
+    letter = 65
+    sum = 0.0
+    CPU=[]
+    for i in range(0, nop):
+        print("Enter process " + chr(letter))
+        letter += 1
+        x = float(input())
+        CPU.append(x)
+    for i in range(0, nop):
+        for j in range(0, i + 1):
+            sum = sum + CPU[j]
+    sum = sum / nop
+    print("Taw calculated using FCFS ", sum)
+
+def SJN(nop):
+    #SJN
+    #Cool
+    CPU=[]
+    letter = 65
+    sum = 0.0
+    for i in range(0, nop):
+        print("Enter process " + chr(letter))
+        letter += 1
+        x = float(input())
+        CPU.append(x)
+    CPU.sort()
+    for i in range(0, nop):
+        for j in range(0, i + 1):
+            sum = sum + CPU[j]
+    sum = sum / nop
+    print("Taw calculated using FCFS ", sum)
+
+def SRT(nop):
+    #shortest remaining time
+    #SRT
+    CPU=[]
+    ARRIVAL=[]
+    End =[]
+    searcher=[]
+    sum = 0.0
+    letter = 65
+    sum = 0.0
+    timer = 0.0
+    FINISHED = []  # making a rubbish list
+    for i in range(0, nop):
+        FINISHED.append(0.0)
+        End.append(0.0)
+
+    for i in range(0, nop):
+        x = int(input("Enter process " + chr(letter)))
+        CPU.append(x)
+        x = int(input("Enter arrival time of Process " + chr(letter)))
+        ARRIVAL.append(x)
+        letter += 1
+
+    for i in range(0,nop):
+        searcher.append(CPU[i])
+        mval=min(k for k in searcher if k>0)
+        index=searcher.index(mval)
+        searcher[index] -= 1
+        timer+=1
+        if searcher[index] == 0:
+            FINISHED[index]=timer
+            searcher[index]=-1
+
+    for i in range(0, nop):
+        mval = min(k for k in searcher if k > 0)
+        index = searcher.index(mval)
+        timer+=searcher[index]
+        searcher[index] -= searcher[index]
+        if(searcher[index]==0):
+            FINISHED[index]=timer
+            searcher[index]=-1
+
+    for i in range(0, nop):
+            End[i] = FINISHED[i]-ARRIVAL[i]
+
+    for i in range(0, nop):
+        for j in range(0, i + 1):
+            sum = sum + End[j]
+    print("Taw calculated using SRT algorithm =",sum/nop)
+
+
+
+
+
+
+
+
+
+
+
+nop = int(input("User please enter the number of processes :( "))
+SRT(nop)
